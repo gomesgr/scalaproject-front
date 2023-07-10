@@ -1,12 +1,12 @@
 import Container from "./components/Container"
-import LoginPage from "./components/pages/LoginPage"
+import CalendarPage from "./components/pages/CalendarPage"
 
 function App() {
 
   return (
         <div>
             <Container>
-                <LoginPage />
+                <CalendarPage />
             </Container>
         </div>
   )
