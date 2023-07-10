@@ -5,16 +5,28 @@ import moment from 'moment'
 moment.locale('pt-br')
 
 function MonthCalendarCell(props: any) {
-    const [cell, setCell] = useState(moment())
-    const cellId = props.fullDate.format('DDMMYYYY')
-
+    const day: number = +props.day
+    const [cell, setCell] = useState(day)
     return (
-        <>
-            <div id={cellId} className='w-full h-full ring-1 ring-unselectedText'>
-                {props.fullDate.date()}
-            </div>  
-        </>
+       <div className='cursor-pointer'>
+            {isExtraDay(props.index, day) ? 
+            (<span className='text-unselectedText'>{cell}</span>) :
+            (<span>{cell}</span>)
+        }
+       </div>
     )
+}
+
+function isExtraDay(week:number, date:number) {
+    if (week === 0 && date > 10) {
+        return true;
+      } else if (week === 5 && date < 10) {
+        return true;
+      } else if (week === 4 && date < 10) {
+        return true;
+      } else {
+        return false;
+      }
 }
 
 export default MonthCalendarCell

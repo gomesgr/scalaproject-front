@@ -1,9 +1,8 @@
-import {IconType} from 'react-icons'
 function Icon({type}: any) {
     return <>
-        <div className='icon'>
+        <span className='items-center'>
             {type}
-        </div>
+        </span>
     </>
 }
 

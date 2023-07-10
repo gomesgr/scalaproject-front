@@ -9,4 +9,15 @@
     .active {
         @apply border-b-4 border-black;
     }
+    #sidebar {
+        @apply bg-amber-50
+    }
+
+    #sidebar div {
+        @apply h-10 flex cursor-pointer flex-row justify-center items-center gap-x-1 w-auto hover:bg-slate-200
+    }
+
+    #sidebar div span:nth-child(2) {
+        @apply w-20
+    }
 }

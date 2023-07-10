@@ -1,0 +1,5 @@
+@layer calendar{
+    tr:first-child th {
+        @apply w-full bg-blue-200 items-center h-10 grid-flow-col justify-end justify-items-end grid
+    }
+}

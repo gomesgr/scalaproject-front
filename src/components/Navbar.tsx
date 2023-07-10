@@ -1,5 +1,3 @@
-import { FaBeer, FaCross } from 'react-icons/fa'
-import Icon from './Icon';
 import Logo from './Logo';
 
 function Navbar() {
