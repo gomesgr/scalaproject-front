@@ -8,6 +8,7 @@ function App() {
         <>
             <Container>
                 <SideBar />
+                <CalendarPage />
             </Container>
         </>
   )

@@ -4,8 +4,7 @@ import Icon from './Icon'
 
 export default function SideBar() {
     return (
-        <div id='sidebar' className='h-full  w-[20rem] shadow-md 
-            justify-start gap-y-5 flex flex-col py-20 text-xl'>
+        <div id='sidebar'>
             <div>
                 <span className=''><Icon type={<BsCalendarWeek />} /></span>
                 <span className=''>Calendário</span>

@@ -10,24 +10,24 @@ moment.locale('pt-br')
 const year = new Date().getFullYear()
 const months = moment.months()
 
-function CalendarComponent() {
+function CalendarComponent(props: any) {
     const [calendar, setCalendar] = useState(moment(Date()))
     const monthToday = moment(calendar).month()
     const weekDays: string[] = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
 
     return <> 
-        <div className='bg-windowColor'>
+        <div id='calendar' className='bg-amber-50 p-5'>
           <table className='table-fixed border p-2 border-black border-separate w-full'>
-            <tr className='flex items-center justify-between'>
-                <th colSpan={7} className='flex w-auto items-center '>
-                    <ul className='flex gap-12'>
-                        <li><Icon type={<AiOutlineArrowLeft />} /></li>
-                        <li>{calendar.format('MMMM.YYYY')}</li>
-                        <li><Icon type={<AiOutlineArrowRight />} /></li>
-                    </ul>
+            <tr className=''>
+                <th colSpan={7} className='m-auto'>
+                    <div className='w-full flex flex-row justify-end gap-10'>
+                        <div><Icon type={<AiOutlineArrowLeft style={{display: 'inline'}}/>} /></div>
+                        <div>{calendar.format('LL')}</div>
+                        <div><Icon type={<AiOutlineArrowRight style={{display: 'inline'}} />} /></div>
+                    </div>
                 </th>
             </tr>
-            <tr className='text-white font-bold text-xl'>
+            <tr className='text-black font-bold text-xl'>
                 {weekDays.map(weekDay => (
                     <th>
                         {weekDay}
@@ -38,13 +38,16 @@ function CalendarComponent() {
                 <tr>
                     {week.map(day => (
                         <td className='border border-slate-700'>
-                            <MonthCalendarCell day={day} index={index} />
+                            <MonthCalendarCell day={day} index={index} 
+                            setCellOptionsState={props.setCellState}
+                            setCellOptionsData={props.setCellData}/>
                         </td>
             ))}
                 </tr>
             ))}
           </table>
         </div>
+        {props.children}
     </>
 
 }
