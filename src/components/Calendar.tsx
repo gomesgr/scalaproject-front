@@ -1,6 +1,7 @@
 import 'moment/dist/locale/pt-br'
 import {useState} from 'react'
-import {AiOutlineArrowRight, AiOutlineArrowLeft} from 'react-icons/ai'
+import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
+import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
@@ -15,36 +16,42 @@ function CalendarComponent(props: any) {
     const monthToday = moment(calendar).month()
     const weekDays: string[] = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
 
-    return <> 
-        <div id='calendar' className='bg-amber-50 p-5'>
-          <table className='table-fixed border p-2 border-black border-separate w-full'>
-            <tr className=''>
-                <th colSpan={7} className='m-auto'>
-                    <div className='w-full flex flex-row justify-end gap-10'>
-                        <div><Icon type={<AiOutlineArrowLeft style={{display: 'inline'}}/>} /></div>
-                        <div>{calendar.format('LL')}</div>
-                        <div><Icon type={<AiOutlineArrowRight style={{display: 'inline'}} />} /></div>
-                    </div>
-                </th>
-            </tr>
-            <tr className='text-black font-bold text-xl'>
-                {weekDays.map(weekDay => (
-                    <th>
-                        {weekDay}
-                    </th>
-                ))}
-            </tr>
-            {getCalendar(monthToday)!.map((week, index) => (
+    const drawCalendar = (monthToDraw: number) => {
+         return getCalendar(monthToDraw)!.map((week, index) => (
                 <tr>
                     {week.map(day => (
-                        <td className='border border-slate-700'>
+                        <td className='border border-slate-500'>
                             <MonthCalendarCell day={day} index={index} 
                             setCellOptionsState={props.setCellState}
                             setCellOptionsData={props.setCellData}/>
-                        </td>
-            ))}
-                </tr>
-            ))}
+                        </td>))}
+                </tr>))
+    }
+
+    return <> 
+        <div id='calendar' className='m-auto h-full flex flex-col items-end justify-between'>
+            <div className='flex items-center justify-around p-1 gap-5 px-10'>
+                <button className='font-black hover:bg-windowColor text-white rounded-md bg-accentColor px-5 text-[24px]'>
+                    Usuário
+                </button>
+                <button className='hover:text-windowColor'>
+                    <Icon type={<RiShutDownLine size={ 24 } />} />
+                </button>
+            </div>
+          <table className='table-fixed border p-2 border-slate-500 border-separate h-auto w-full flex-1'>
+            <tr>
+                <th colSpan={7} className='m-auto'>
+                    <div className='w-full flex flex-row justify-end gap-10 bg-inherit'>
+                        <button><Icon type={<AiOutlineArrowLeft style={{display: 'inline'}}/>} /></button>
+                        <div className='bg-inherit'>{calendar.format('LL')}</div>
+                        <button><Icon type={<AiOutlineArrowRight style={{display: 'inline'}} />} /></button>
+                    </div>
+                </th>
+            </tr>
+            <tr className='text-black bg-inherit font-bold text-xl'>
+                {weekDays.map(weekDay => <th>{weekDay}</th>)}
+            </tr>
+                {drawCalendar(monthToday)}
           </table>
         </div>
         {props.children}

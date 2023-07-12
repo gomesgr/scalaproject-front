@@ -13,7 +13,7 @@
     /* SIDEBAR */
     
     #sidebar {
-        @apply bg-amber-50 h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col py-20 text-xl
+        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col py-20 text-xl
     }
 
     #sidebar div {
@@ -23,4 +23,10 @@
     #sidebar div span:nth-child(2) {
         @apply w-20
     }
+
+    div {
+        @apply bg-slate-50;
+    }
+
+    
 }

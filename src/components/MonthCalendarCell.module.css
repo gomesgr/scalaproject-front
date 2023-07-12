@@ -1,0 +1,5 @@
+@layer MonthCalendarCell {
+    tr td {
+        @apply bg-slate-300
+    }
+}

@@ -3,7 +3,7 @@ import Logo from './Logo';
 function Navbar() {
     return (
         <>
-        <header className='border-b border-gray-700 w-full'>
+        <header className='border-b border-gray-700 w-full top-0'>
             <div className='flex items-center justify-between bg-windowColor p-5'>
                 <a href=""><Logo /></a>
                 <nav className='flex w-auto items-center gap-5 md:gap-24'>
