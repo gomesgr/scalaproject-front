@@ -15,7 +15,7 @@ function MonthCalendarCell(props: any) {
         options(cell)
     }
 
-    const [cell, setCell] = useState({evento: {dia: day, hora: '19h', membros:[1,2,3]}})
+    const [cell, _setCell] = useState({evento: {dia: day, hora: '19h', membros:[1,2,3]}})
     return (
         <div id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}
             className=' cursor-pointer bg-inherit'>
