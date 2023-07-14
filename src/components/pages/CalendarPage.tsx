@@ -7,7 +7,9 @@ function CalendarPage() {
     const [cellData, setCellData] = useState({})
     return (
         <>      
-            <CalendarComponent setCellState={setCellState} setCellData={setCellData}>
+            <CalendarComponent
+                setCellState={setCellState}
+                setCellData={setCellData}>
                 <MonthCalendarCellOptions 
                     cellState={cellState} 
                     cellData={cellData}

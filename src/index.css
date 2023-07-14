@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-/* @import 'react-big-calendar/lib/sass/styles'; */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 
 @tailwind base;
 @tailwind components;
@@ -13,20 +13,49 @@
     /* SIDEBAR */
     
     #sidebar {
-        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col py-20 text-xl
+        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col text-xl py-5
     }
 
     #sidebar div {
-        @apply h-10 flex cursor-pointer flex-row justify-center items-center gap-x-1 w-auto hover:bg-slate-200
+        @apply h-10 flex cursor-pointer flex-row justify-center items-center gap-x-1 
+            w-auto 
+    }
+
+    #sidebar > div:not(:first-child) {
+        @apply hover:bg-accentColor hover:text-white
     }
 
     #sidebar div span:nth-child(2) {
         @apply w-20
     }
 
+    #sidebar > div:not(:first-child) {
+        @apply h-10 w-auto px-10
+    }
+
     div {
         @apply bg-slate-50;
     }
 
+    /* Calendario */
+    #calendar {
+        @apply m-auto h-full flex flex-col items-end justify-between 
+    }
+
+    #calendar > div {
+        @apply flex items-center justify-around p-1 gap-5 px-10
+    }
+
+    #calendar > div > div {
+        @apply w-full flex flex-row justify-end gap-10 bg-inherit
+    }
+
+    #calendar table {
+        @apply table-fixed p-2 border-separate w-full flex-auto
+    }
+
+    #calendar th {
+        @apply font-light
+    }
     
 }

@@ -8,7 +8,7 @@ export default function MonthCalendarCellOptions(props: any) {
     if (props.cellState) {
         return (
             <div className="absolute h-3/6 w-3/6 p-10 border-2 border-slate-500
-                bg-slate-300 mx-auto left-0 right-0 top-40 flex flex-row shadow-md">
+                bg-slate-100 mx-auto left-0 right-0 top-40 flex flex-row shadow-md rounded-md">
                 <div className=' flex-1 items-center bg-inherit'>
                 {props.cellData.evento.dia}
                 </div>

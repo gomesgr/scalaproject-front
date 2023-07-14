@@ -6,19 +6,23 @@ import './MonthCalendarCell.module.css'
 moment.locale('pt-br')
 
 function MonthCalendarCell(props: any) {
-    const day: number = +props.day  
+    const day: number = props.day
+    const month: number = props.moment.month()
+    const year: number = props.moment.year()
+
     const showCellOptions = (options: Function, toggler: Function) => {
         toggler(true) 
         options(cell)
     }
+
     const [cell, setCell] = useState({evento: {dia: day, hora: '19h', membros:[1,2,3]}})
     return (
         <div id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}
-            className='cursor-pointer h-20 bg-inherit'>
+            className=' cursor-pointer bg-inherit'>
             {/* Verifica se o dia é extra, e se for, verifica se é hoje */}
             {isExtraDay(props.index, day)
                 ? (<span className='text-unselectedText'>{day}</span>)
-                : (isToday(day)
+                : (isToday(day, month, year)
                     ? <span className='text-accentColor'>{day}</span>
                     : <span>{day}</span>)
         }
@@ -34,8 +38,10 @@ function MonthCalendarCell(props: any) {
     )
 }
 
-function isToday(day: number): boolean {
-    return day == new Date().getDate()
+function isToday(day: number, month: number, year: number): boolean {
+    return ((day == moment().date()) &&
+        (month == moment().month()) && 
+            (year == moment().year()))
 }
 
 function isExtraDay(week:number, date:number): boolean {

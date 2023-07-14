@@ -1,5 +1,3 @@
-import Navbar from "./Navbar"
-
 function Container(props: any) {
     return (
         <>

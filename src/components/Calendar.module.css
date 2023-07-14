@@ -1,9 +1,5 @@
 @layer calendar{
-    tr:first-child th{
-        @apply w-full 
-    }
-
     table{
-        @apply bg-slate-300
+        @apply bg-slate-100 rounded-md
     }
 }

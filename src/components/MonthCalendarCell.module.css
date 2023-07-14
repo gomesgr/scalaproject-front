@@ -1,5 +1,5 @@
 @layer MonthCalendarCell {
     tr td {
-        @apply bg-slate-300
+        @apply bg-slate-100 rounded-sm
     }
 }
