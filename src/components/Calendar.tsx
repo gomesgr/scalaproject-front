@@ -5,7 +5,6 @@ import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
-import './Calendar.module.css'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {

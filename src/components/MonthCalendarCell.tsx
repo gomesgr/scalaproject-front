@@ -1,7 +1,6 @@
 import 'moment/dist/locale/pt-br'
 import {useState} from 'react'
 import moment from 'moment'
-import './MonthCalendarCell.module.css'
 
 moment.locale('pt-br')
 

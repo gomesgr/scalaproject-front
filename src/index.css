@@ -51,11 +51,19 @@
     }
 
     #calendar table {
-        @apply table-fixed p-2 border-separate w-full flex-auto
+        @apply table-fixed p-2 border-separate w-full flex-auto bg-slate-100 rounded-md
     }
 
     #calendar th {
         @apply font-light
     }
+
+    #calendar > tr td {
+        @apply bg-slate-100 rounded-sm
+    }
     
+    #cell-options {
+        @apply absolute h-3/6 w-3/6 p-10 border-2 border-slate-500 bg-slate-100 mx-auto 
+            left-0 right-0 top-40 flex shadow-md rounded-md justify-between
+    }
 }

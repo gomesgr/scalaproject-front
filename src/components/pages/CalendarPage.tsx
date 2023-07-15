@@ -2,7 +2,7 @@ import MonthCalendarCellOptions from '../MonthCalendarCellOptions'
 import CalendarComponent from './../Calendar'
 import {useState} from 'react'
 
-function CalendarPage() {
+function CalendarPage(props: any) {
     const [cellState, setCellState] = useState(false)
     const [cellData, setCellData] = useState({})
     return (
@@ -11,9 +11,10 @@ function CalendarPage() {
                 setCellState={setCellState}
                 setCellData={setCellData}>
                 <MonthCalendarCellOptions 
-                    cellState={cellState} 
+                    cellState={cellState}
                     cellData={cellData}
-                    setCellState={setCellState} />
+                    setCellState={setCellState}
+                    funcoes={props.funcao} />
             </CalendarComponent>
             
         </>

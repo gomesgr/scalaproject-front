@@ -1,5 +1,0 @@
-@layer calendar{
-    table{
-        @apply bg-slate-100 rounded-md
-    }
-}
