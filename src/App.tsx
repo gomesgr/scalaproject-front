@@ -8,6 +8,10 @@ const urlFuncao:string = ('http://localhost:8080/api/funcao')
 
 function App() {
     const [state, setState] = useState({})
+    /* TODO
+     *
+     * Chamada recursiva infinita
+    */
     useEffect(() => {
         const dataFetch = async () => {
             const funcao: FuncaoData = await (
