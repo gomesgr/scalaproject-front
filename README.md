@@ -19,7 +19,7 @@ Os pontos cruciais do mesmo são: <br>
 
 -   React (vite)
 
-### Backend
+### [Backend](https://github.com/gomesgr/scalaproject)
 
 -   Springboot
 -   Java 17
