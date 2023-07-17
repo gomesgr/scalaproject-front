@@ -3,26 +3,27 @@ import SideBar from "./components/SideBar"
 import CalendarPage from "./components/pages/CalendarPage"
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { urlFuncao } from "./components/FuncaoData"
+import { FuncaoData, MembroData, urlFuncao, urlMembro } from "./components/Constants"
 
 
 function App() {
-    const [funcoes, setFuncoes] = useState({})
+    const [funcoes, setFuncoes] = useState([{} as FuncaoData])
+    const [membros, setMembros] = useState([{} as MembroData])
     // Chamada de API para funções no MonthCellOptions
     useEffect(() => {
         axios.get(urlFuncao)
-            .then(result => {
-            setFuncoes(result.data)
-        })
-        .catch(error => {
-            console.error(error)
-        })
+            .then(result => setFuncoes(result.data))
+        .catch(error => console.error(error))
+
+        axios.get(urlMembro)
+            .then(result => setMembros(result.data))
+        .catch(error => console.error(error))
     }, [])
 
     return (
         <Container>
             <SideBar />
-            <CalendarPage funcoes={funcoes} />
+            <CalendarPage funcoes={funcoes} membros={membros} />
         </Container>
 
     )

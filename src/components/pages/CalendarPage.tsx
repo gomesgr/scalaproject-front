@@ -15,7 +15,8 @@ function CalendarPage(props: any) {
                     cellState={cellState}
                     cellData={cellData}
                     setCellState={setCellState}
-                    funcoes={props.funcoes} />
+                    funcoes={props.funcoes}
+                    membros={props.membros} />
             </CalendarComponent>
             
         </>
