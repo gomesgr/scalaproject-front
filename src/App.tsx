@@ -1,32 +1,28 @@
-import { FuncaoData } from "./components/Connection"
 import Container from "./components/Container"
 import SideBar from "./components/SideBar"
 import CalendarPage from "./components/pages/CalendarPage"
 import { useEffect, useState } from "react"
+import axios from 'axios'
+import { urlFuncao } from "./components/FuncaoData"
 
-const urlFuncao:string = ('http://localhost:8080/api/funcao')
 
 function App() {
-    const [state, setState] = useState({})
-    /* TODO
-     *
-     * Chamada recursiva infinita
-    */
+    const [funcoes, setFuncoes] = useState({})
+    // Chamada de API para funções no MonthCellOptions
     useEffect(() => {
-        const dataFetch = async () => {
-            const funcao: FuncaoData = await (
-                (await fetch(urlFuncao)).json())
-            setState(funcao)
-        }
-
-        dataFetch()
-    })
-
+        axios.get(urlFuncao)
+            .then(result => {
+            setFuncoes(result.data)
+        })
+        .catch(error => {
+            console.error(error)
+        })
+    }, [])
 
     return (
         <Container>
             <SideBar />
-            <CalendarPage funcao={state} />
+            <CalendarPage funcoes={funcoes} />
         </Container>
 
     )

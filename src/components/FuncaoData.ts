@@ -7,3 +7,5 @@ export type FuncaoData = {
         funcao: any
     }>
 }
+
+export const urlFuncao:string = ('http://localhost:8080/api/funcao')

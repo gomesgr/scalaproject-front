@@ -1,9 +1,9 @@
 import {FaTimes} from 'react-icons/fa'
 import Icon from './Icon'
-import { FuncaoData } from './Connection'
+import { FuncaoData } from './FuncaoData'
 
 export default function MonthCalendarCellOptions(props: any) {
-    const funcoes = props.funcoes
+    const funcoes: FuncaoData[] = props.funcoes
     const close = () => {
         props.setCellState(false)
     }
