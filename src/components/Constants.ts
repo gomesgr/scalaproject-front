@@ -25,6 +25,12 @@ export type Membro = {
 }
 export const urlMembro: string = 'http://localhost:8080/api/membro'
 
+export type Culto = {
+    data: number,
+    nome: string
+}
+export const urlCulto: string = 'http://localhost:8080/api/culto'
+
 export interface FuncaoObject {
     selectedFuncao: Funcao | null
 }

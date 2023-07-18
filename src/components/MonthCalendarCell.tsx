@@ -1,6 +1,7 @@
 import 'moment/dist/locale/pt-br'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import moment from 'moment'
+import { Culto } from './Constants'
 
 moment.locale('pt-br')
 
@@ -8,17 +9,15 @@ function MonthCalendarCell(props: any) {
     const day: number = props.day
     const month: number = props.moment.month()
     const year: number = props.moment.year()
+    const cultos: Culto[] = props.cultos
 
     const showCellOptions = (options: Function, toggler: Function) => {
         toggler(true) 
         options(cell)
     }
 
-    const [cell, _setCell] = useState({evento: {dia: day, hora: '19h', membros:[1,2,3]}})
-    return (
-        <div id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}
-            className=' cursor-pointer bg-inherit'>
-            {/* Verifica se o dia é extra, e se for, verifica se é hoje */}
+    const cellDataBuilder = () => {
+        return <>
             {isExtraDay(props.index, day)
                 ? (<span className='text-unselectedText'>{day}</span>)
                 : (isToday(day, month, year)
@@ -32,8 +31,17 @@ function MonthCalendarCell(props: any) {
                 <div className='bg-inherit'>
                     {cell.evento.hora}
                 </div>
+            </div>
+        </>
+    }
+
+    const [cell, _setCell] = useState({ evento: { dia: day, hora: '19h', membros: [1, 2, 3] } })
+
+    return (
+        <div id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} className='cursor-pointer bg-inherit'>
+            {/* Verifica se o dia é extra, e se for, verifica se é hoje */}
+            {cellDataBuilder()}
         </div>
-       </div>
     )
 }
 
@@ -46,13 +54,13 @@ function isToday(day: number, month: number, year: number): boolean {
 function isExtraDay(week:number, date:number): boolean {
     if (week === 0 && date > 10) {
         return true;
-      } else if (week === 5 && date < 10) {
+    } else if (week === 5 && date < 10) {
         return true;
-      } else if (week === 4 && date < 10) {
+    } else if (week === 4 && date < 10) {
         return true;
-      } else {
+    } else {
         return false;
-      }
+    }
 }
 
 export default MonthCalendarCell

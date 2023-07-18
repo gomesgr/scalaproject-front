@@ -1,29 +1,52 @@
 import 'moment/dist/locale/pt-br'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
+import { Culto } from './Constants'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
     const [calendar, setCalendar] = useState(moment())
     const weekDays: string[] = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+    const [cultoDay, setCultoDay] = useState('')
+    const cultos: Culto[] = props.cultos
+
+    const temCulto =(day: number, month: number): boolean => {
+        for (let culto of cultos) {
+            let data = new Date(culto.data)
+            if (data.getDate() == day && data.getMonth() == month)
+                return true
+        }
+        return false
+    }
 
     const drawCalendar = () => {
-         return getCalendar(calendar.month(), calendar.year())!.map((week, index) => (
+        return getCalendar(calendar.month(), calendar.year())!.map((week, index) => (
                 <tr className=''>
-                    {week.map(day => (
+                {week.map(day => (
+                    temCulto(+day, calendar.month())
+                        ? (
+                        <td className='bg-amber-700 text-white'>
+                            <MonthCalendarCell
+                                day={day}
+                                index={index} 
+                                moment={calendar}
+                                setCellOptionsState={props.setCellState}
+                                setCellOptionsData={props.setCellData}/>
+                        </td>)
+                        : (
                         <td className='border border-slate-200 '>
                             <MonthCalendarCell
                                 day={day}
                                 index={index} 
                                 moment={calendar}
                                 setCellOptionsState={props.setCellState}
-                                setCellOptionsData={props.setCellData}
-                            />
-                        </td>))}
+                                setCellOptionsData={props.setCellData}/>
+                        </td>)
+                    ))}
                 </tr>))
     }
 
@@ -57,16 +80,16 @@ function CalendarComponent(props: any) {
                     <Icon type={<RiShutDownLine size={ 24 } />} />
                 </button>
             </div>
-          <table>
+        <table>
             <tr className='text-black bg-inherit text-xl h-10'>
                 {weekDays.map(weekDay => <th>{weekDay}</th>)}
             </tr>
                 {drawCalendar()}
-          </table>
+        </table>
         </div>
         {props.children}
     </>
-
+    
 }
 
 function getCalendar(month: number, year: number) {

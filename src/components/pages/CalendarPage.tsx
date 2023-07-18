@@ -10,7 +10,8 @@ function CalendarPage(props: any) {
         <>      
             <CalendarComponent
                 setCellState={setCellState}
-                setCellData={setCellData}>
+                setCellData={setCellData}
+                cultos={props.cultos}>
                 <MonthCalendarCellOptions 
                     cellState={cellState}
                     cellData={cellData}
