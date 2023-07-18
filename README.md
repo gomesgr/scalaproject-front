@@ -28,3 +28,6 @@ Os pontos cruciais do mesmo são: <br>
 ### Banco de Dados
 
 -   PostgreSQL (alocado num docker)
+-   Modelo E-R do Banco:
+
+![Modelo Entidade Relacionamento](banco.png)
