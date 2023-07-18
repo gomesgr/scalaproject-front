@@ -5,7 +5,7 @@ import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
-import { Culto } from './Constants'
+import { Culto, CultoBool } from './Constants'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
@@ -14,39 +14,43 @@ function CalendarComponent(props: any) {
     const [cultoDay, setCultoDay] = useState('')
     const cultos: Culto[] = props.cultos
 
-    const temCulto =(day: number, month: number): boolean => {
+    const temCulto =(day: number, month: number): CultoBool => {
         for (let culto of cultos) {
             let data = new Date(culto.data)
             if (data.getDate() == day && data.getMonth() == month)
-                return true
+                return {culto: culto, existe: true}
         }
-        return false
+        return {culto: null, existe: false}
+    }
+
+    const mapWeek = (week: string[], index: number) => {
+        return week.map((day) => {
+            var cultoBool = temCulto(+day, calendar.month());
+            return (cultoBool.existe
+                ? (
+                <MonthCalendarCell
+                    day={day}
+                    index={index}
+                    moment={calendar}
+                    setCellOptionsState={props.setCellState}
+                    setCellOptionsData={props.setCellData}
+                    culto={cultoBool.culto} />
+                )
+                : (
+                <MonthCalendarCell
+                    day={day}
+                    index={index}
+                    moment={calendar}
+                    setCellOptionsState={props.setCellState}
+                    setCellOptionsData={props.setCellData} />
+                )
+        )})
     }
 
     const drawCalendar = () => {
         return getCalendar(calendar.month(), calendar.year())!.map((week, index) => (
-                <tr className=''>
-                {week.map(day => (
-                    temCulto(+day, calendar.month())
-                        ? (
-                        <td className='bg-amber-700 text-white'>
-                            <MonthCalendarCell
-                                day={day}
-                                index={index} 
-                                moment={calendar}
-                                setCellOptionsState={props.setCellState}
-                                setCellOptionsData={props.setCellData}/>
-                        </td>)
-                        : (
-                        <td className='border border-slate-200 '>
-                            <MonthCalendarCell
-                                day={day}
-                                index={index} 
-                                moment={calendar}
-                                setCellOptionsState={props.setCellState}
-                                setCellOptionsData={props.setCellData}/>
-                        </td>)
-                    ))}
+                <tr>
+                {mapWeek(week, index)}
                 </tr>))
     }
 

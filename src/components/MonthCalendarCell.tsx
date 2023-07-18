@@ -9,7 +9,7 @@ function MonthCalendarCell(props: any) {
     const day: number = props.day
     const month: number = props.moment.month()
     const year: number = props.moment.year()
-    const cultos: Culto[] = props.cultos
+    const culto: Culto = props.culto
 
     const showCellOptions = (options: Function, toggler: Function) => {
         toggler(true) 
@@ -23,25 +23,29 @@ function MonthCalendarCell(props: any) {
                 : (isToday(day, month, year)
                     ? <span className='text-accentColor'>{day}</span>
                     : <span>{day}</span>)
-        }
-            <div className='flex flex-col bg-inherit'>
-                <div className='bg-inherit'>
-                    {cell.evento.dia}
-                </div>
-                <div className='bg-inherit'>
-                    {cell.evento.hora}
-                </div>
+            }
+            <div>
+                {culto ? culto.nome : ''}
             </div>
         </>
     }
 
     const [cell, _setCell] = useState({ evento: { dia: day, hora: '19h', membros: [1, 2, 3] } })
-
+    if (culto) {
+        return (
+            <td id='cell' className='bg-accentColor text-white' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
+                <div className='bg-inherit'>
+                {cellDataBuilder()}
+            </div>
+            </td>
+        )
+    }
     return (
-        <div id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} className='cursor-pointer bg-inherit'>
-            {/* Verifica se o dia é extra, e se for, verifica se é hoje */}
+        <td id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}>
+        <div className='bg-inherit w-full h-full'>
             {cellDataBuilder()}
-        </div>
+            </div>
+        </td>
     )
 }
 

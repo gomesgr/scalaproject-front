@@ -25,6 +25,11 @@ export type Membro = {
 }
 export const urlMembro: string = 'http://localhost:8080/api/membro'
 
+export type CultoBool = {
+    culto: Culto | null,
+    existe: boolean
+}
+
 export type Culto = {
     data: number,
     nome: string

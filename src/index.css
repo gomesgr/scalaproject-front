@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -9,57 +8,61 @@
     .active {
         @apply border-b-4 border-black;
     }
-    
+
     /* SIDEBAR */
-    
+
     #sidebar {
-        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col text-xl py-5
+        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col text-xl py-5;
     }
 
     #sidebar div {
         @apply h-10 flex cursor-pointer flex-row justify-center items-center gap-x-1 
-            w-auto 
+            w-auto;
     }
 
     #sidebar > div:not(:first-child) {
-        @apply hover:bg-accentColor hover:text-white
+        @apply hover:bg-accentColor hover:text-white;
     }
 
     #sidebar div span:nth-child(2) {
-        @apply w-20
+        @apply w-20;
     }
 
     #sidebar > div:not(:first-child) {
-        @apply h-10 w-auto px-10
+        @apply h-10 w-auto px-10;
     }
 
     /* Calendario */
     #calendar {
-        @apply m-auto h-full flex flex-col items-end justify-between 
+        @apply m-auto h-full flex flex-col items-end justify-between;
     }
 
     #calendar > div {
-        @apply flex items-center justify-around p-1 gap-5 px-10
+        @apply flex items-center justify-around p-1 gap-5 px-10;
     }
 
     #calendar > div > div {
-        @apply w-full flex flex-row justify-end gap-10 bg-inherit
+        @apply w-full flex flex-row justify-end gap-10 bg-inherit;
     }
 
     #calendar table {
-        @apply table-fixed p-2 border-separate w-full flex-auto bg-slate-100 rounded-md
+        @apply table-fixed p-2 border-separate w-full flex-auto bg-slate-100 rounded-md;
     }
 
-    #calendar th {
-        @apply font-light
+    th {
+        @apply font-light;
     }
 
-    #calendar > tr td {
-        @apply bg-slate-100 rounded-sm
+    #cell {
+        @apply border border-slate-200 rounded-sm cursor-pointer hover:scale-110 hover:bg-slate-300;
     }
-    
+
+    #cell > div {
+        @apply grid grid-flow-row justify-stretch h-20;
+    }
+
     #cell-options {
         @apply absolute h-3/6 w-4/6 p-10 border-2 border-slate-500 bg-slate-100 m-auto 
-            left-0 right-0 top-40 flex flex-row shadow-md rounded-md justify-between
+            left-0 right-0 top-40 flex flex-row shadow-md rounded-md justify-between;
     }
 }
