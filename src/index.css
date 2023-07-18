@@ -42,7 +42,6 @@
         @apply flex items-center justify-around p-1 gap-5 px-10
     }
 
-    /* NÃ */
     #calendar > div > div {
         @apply w-full flex flex-row justify-end gap-10 bg-inherit
     }
@@ -55,14 +54,12 @@
         @apply font-light
     }
 
-    /* NÃO É */
     #calendar > tr td {
         @apply bg-slate-100 rounded-sm
     }
     
-    /* NÃO É */
     #cell-options {
-        @apply absolute h-3/6 w-3/6 p-10 border-2 border-slate-500 bg-slate-100 mx-auto 
-            left-0 right-0 top-40 flex shadow-md rounded-md justify-between
+        @apply absolute h-3/6 w-4/6 p-10 border-2 border-slate-500 bg-slate-100 m-auto 
+            left-0 right-0 top-40 flex flex-row shadow-md rounded-md justify-between
     }
 }

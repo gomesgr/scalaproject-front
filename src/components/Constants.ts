@@ -9,7 +9,7 @@ export type Funcao = {
 }
 export const urlFuncao: string = 'http://localhost:8080/api/funcao'
 
-export type MembroData = {
+export type Membro = {
     id: number,
     nome: string,
     telefone: string,
@@ -25,6 +25,10 @@ export type MembroData = {
 }
 export const urlMembro: string = 'http://localhost:8080/api/membro'
 
-export interface ArrayObjectSelectState {
+export interface FuncaoObject {
     selectedFuncao: Funcao | null
+}
+
+export interface MembroObject {
+    selectedMembro: Membro | null
 }

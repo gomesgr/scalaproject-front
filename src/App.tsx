@@ -3,12 +3,12 @@ import SideBar from "./components/SideBar"
 import CalendarPage from "./components/pages/CalendarPage"
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { FuncaoData, MembroData, urlFuncao, urlMembro } from "./components/Constants"
+import { Funcao, Membro, urlFuncao, urlMembro } from "./components/Constants"
 
 
 function App() {
-    const [funcoes, setFuncoes] = useState([{} as FuncaoData])
-    const [membros, setMembros] = useState([{} as MembroData])
+    const [funcoes, setFuncoes] = useState([{} as Funcao])
+    const [membros, setMembros] = useState([{} as Membro])
     // Chamada de API para funções no MonthCellOptions
     useEffect(() => {
         axios.get(urlFuncao)

@@ -1,11 +1,11 @@
 import {FaTimes} from 'react-icons/fa'
 import Icon from './Icon'
-import { Funcao, MembroData } from './Constants'
+import { Funcao, Membro } from './Constants'
 import SelectMembers from './SelectMembers'
 
 export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
-    const membros: MembroData[] = props.membros
+    const membros: Membro[] = props.membros
     const close = () => {
         props.setCellState(false)
     }
@@ -22,14 +22,13 @@ export default function MonthCalendarCellOptions(props: any) {
                         {props.cellData.evento.membros}
                     </div>
                 </div>
-                <div className='bg-inherit flex flex-row justify-between gap-5'>
-                    <button onClick={close}>
-                        <Icon classes={'text-red-500 hover:text-windowColor'} type={<FaTimes style={{display: 'inline'}} size={28}/>}/>
-                    </button>
-
+                <div className='bg-inherit grid grid-rows-6 grid-cols-2 justify-items-center gap-y-2'>
                     <SelectMembers funcoes={funcoes} membros={membros} />
-                    <button className='bg-accentColor rounded-sm p-2 text-white font-medium hover:bg-windowColor'>Adicionar evento</button>
+                    <button className='bg-accentColor h-10 w-40 col-span-2 rounded-sm p-1 text-white font-medium hover:bg-windowColor'>Adicionar evento</button>
                 </div>
+                <button onClick={close}>
+                        <Icon classes={'text-red-500 hover:text-windowColor'} type={<FaTimes style={{display: 'inline'}} size={28}/>}/>
+                </button>
             </div>        
         )    
     }  
