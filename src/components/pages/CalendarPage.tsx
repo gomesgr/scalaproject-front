@@ -5,6 +5,7 @@ import {useState} from 'react'
 function CalendarPage(props: any) {
     const [cellState, setCellState] = useState(false)
     const [cellData, setCellData] = useState({})
+    const [cultoDay, setCultoDay] = useState({})
 
     return (
         <>      
@@ -17,7 +18,9 @@ function CalendarPage(props: any) {
                     cellData={cellData}
                     setCellState={setCellState}
                     funcoes={props.funcoes}
-                    membros={props.membros} />
+                    membros={props.membros}
+                    cultoDay={cultoDay}
+                    setCultoDay={setCultoDay} />
             </CalendarComponent>
             
         </>

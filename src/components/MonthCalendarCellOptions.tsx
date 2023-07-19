@@ -14,12 +14,16 @@ export default function MonthCalendarCellOptions(props: any) {
         return (
             <div id='cell-options' className="">
                 <div className='bg-inherit'>
-                {props.cellData.evento.dia}
+                    {
+                        props.cellData.culto.data
+                            ? `${new Date(props.cellData.culto.data).getHours()}h`
+                            : ''
+                    }
                 </div>
                 <div className='bg-inherit flex flex-col gap-10'>
-                    {props.cellData.evento.hora}
+                    {props.cellData.culto.nome}
                     <div className='bg-inherit'>
-                        {props.cellData.evento.membros}
+                        {props.cellData.membros}
                     </div>
                 </div>
                 <div className='bg-inherit grid grid-rows-6 grid-cols-2 justify-items-center gap-y-2'>

@@ -25,7 +25,7 @@ function CalendarComponent(props: any) {
 
     const mapWeek = (week: string[], index: number) => {
         return week.map((day) => {
-            var cultoBool = temCulto(+day, calendar.month());
+            var cultoBool = temCulto(+day, calendar.month())
             return (cultoBool.existe
                 ? (
                 <MonthCalendarCell

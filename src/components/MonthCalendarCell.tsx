@@ -1,7 +1,7 @@
 import 'moment/dist/locale/pt-br'
 import {useEffect, useState} from 'react'
 import moment from 'moment'
-import { Culto } from './Constants'
+import { Culto, Membro } from './Constants'
 
 moment.locale('pt-br')
 
@@ -13,10 +13,24 @@ function MonthCalendarCell(props: any) {
 
     const showCellOptions = (options: Function, toggler: Function) => {
         toggler(true) 
-        options(cell)
+        if (culto) {
+            const newCell = { dia: day, culto: culto }
+            options(newCell)
+        } else {
+            options(cell)
+        }
     }
 
     const cellDataBuilder = () => {
+
+        const temCulto = (): string => {
+            if (culto) {
+                // setCell({dia: day, hora: culto.data, membros: [], culto: culto})
+                return culto.nome
+            }
+            return ''
+        }
+
         return <>
             {isExtraDay(props.index, day)
                 ? (<span className='text-unselectedText'>{day}</span>)
@@ -25,12 +39,12 @@ function MonthCalendarCell(props: any) {
                     : <span>{day}</span>)
             }
             <div>
-                {culto ? culto.nome : ''}
+                {temCulto()}
             </div>
         </>
     }
 
-    const [cell, _setCell] = useState({ evento: { dia: day, hora: '19h', membros: [1, 2, 3] } })
+    const cell = ({ dia: day, hora: 100000000000, membros: [] as Membro[], culto: {} as Culto })
     if (culto) {
         return (
             <td id='cell' className='bg-accentColor text-white' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
