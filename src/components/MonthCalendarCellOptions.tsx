@@ -1,11 +1,32 @@
 import {FaTimes} from 'react-icons/fa'
 import Icon from './Icon'
-import { Funcao, Membro } from './Constants'
+import { Culto, Funcao, Membro, Trabalha, urlTrabalha } from './Constants'
 import SelectMembers from './SelectMembers'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
     const membros: Membro[] = props.membros
+    const culto: Culto = props.cellData.culto
+    const [trabalha, setTrabalha] = useState({} as Trabalha)
+
+    
+    useEffect(() => {
+        if (culto) {
+            axios
+            .get(`${urlTrabalha}?data=${culto.data}`)
+            .then(data => setTrabalha(data.data))
+            .catch(error => console.error(error))
+        } else {
+            axios
+                .get(`${urlTrabalha}`)
+                .then(data => setTrabalha(data.data))
+                .catch(error => console.error(error))
+        }
+    })
+
+
     const close = () => {
         props.setCellState(false)
     }
@@ -16,7 +37,7 @@ export default function MonthCalendarCellOptions(props: any) {
                 <div className='bg-inherit'>
                     {
                         props.cellData.culto.data
-                            ? `${new Date(props.cellData.culto.data).getHours()}h`
+                            ? `${new Date(culto.data).getHours()}h`
                             : ''
                     }
                 </div>
@@ -24,6 +45,11 @@ export default function MonthCalendarCellOptions(props: any) {
                     {props.cellData.culto.nome}
                     <div className='bg-inherit'>
                         {props.cellData.membros}
+                    </div>
+                    <div>
+                        {
+                            trabalha ? trabalha.exerce.membro.nome : ''
+                        }
                     </div>
                 </div>
                 <div className='bg-inherit grid grid-rows-6 grid-cols-2 justify-items-center gap-y-2'>

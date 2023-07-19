@@ -1,5 +1,4 @@
 import 'moment/dist/locale/pt-br'
-import {useEffect, useState} from 'react'
 import moment from 'moment'
 import { Culto, Membro } from './Constants'
 
@@ -25,7 +24,6 @@ function MonthCalendarCell(props: any) {
 
         const temCulto = (): string => {
             if (culto) {
-                // setCell({dia: day, hora: culto.data, membros: [], culto: culto})
                 return culto.nome
             }
             return ''
@@ -44,7 +42,7 @@ function MonthCalendarCell(props: any) {
         </>
     }
 
-    const cell = ({ dia: day, hora: 100000000000, membros: [] as Membro[], culto: {} as Culto })
+    const cell = ({ dia: day, hora: 0, membros: [] as Membro[], culto: {} as Culto })
     if (culto) {
         return (
             <td id='cell' className='bg-accentColor text-white' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >

@@ -43,3 +43,17 @@ export interface FuncaoObject {
 export interface MembroObject {
     selectedMembro: Membro | null
 }
+
+export type Exerce = {
+    id: number,
+    membro: Membro,
+    funcao: Funcao
+}
+
+export type Trabalha = {
+    id: number,
+    exerce: Exerce,
+    culto: Culto
+}
+
+export const urlTrabalha: string = 'http://localhost:8080/api/trabalha/teste'
