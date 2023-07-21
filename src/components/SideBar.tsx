@@ -1,5 +1,6 @@
 import {BsCalendarWeek, BsFillPeopleFill, BsWrenchAdjustableCircle} from 'react-icons/bs'
-import {LuChurch} from 'react-icons/lu'
+import { LuChurch } from 'react-icons/lu'
+import { Link } from "react-router-dom";
 import Icon from './Icon'
 import Logo from './Logo'
 
@@ -7,7 +8,9 @@ export default function SideBar() {
     return (<>
         <div id='sidebar'>
             <div className=''>
-                <Icon type={<Logo />} />
+                <Link to='/'>
+                    <Icon type={<Logo />} />
+                </Link>
             </div>
             <div>
                 <span className=''><Icon type={<BsCalendarWeek />} /></span>

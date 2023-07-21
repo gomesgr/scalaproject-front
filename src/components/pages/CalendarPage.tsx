@@ -1,4 +1,6 @@
+import Container from '../Container'
 import MonthCalendarCellOptions from '../MonthCalendarCellOptions'
+import SideBar from '../SideBar'
 import CalendarComponent from './../Calendar'
 import {useState} from 'react'
 
@@ -8,21 +10,25 @@ function CalendarPage(props: any) {
     const [cultoDay, setCultoDay] = useState({})
 
     return (
-        <>      
-            <CalendarComponent
-                setCellState={setCellState}
-                setCellData={setCellData}
-                cultos={props.cultos}>
-                <MonthCalendarCellOptions 
-                    cellState={cellState}
-                    cellData={cellData}
-                    setCellState={setCellState}
-                    funcoes={props.funcoes}
-                    membros={props.membros}
-                    cultoDay={cultoDay}
-                    setCultoDay={setCultoDay} />
-            </CalendarComponent>
-            
+        <>
+            <Container>
+                <div className='flex flex-row h-screen'>
+                    <SideBar />
+                    <CalendarComponent
+                        setCellState={setCellState}
+                        setCellData={setCellData}
+                        cultos={props.cultos}>
+                        <MonthCalendarCellOptions 
+                            cellState={cellState}
+                            cellData={cellData}
+                            setCellState={setCellState}
+                            funcoes={props.funcoes}
+                            membros={props.membros}
+                            cultoDay={cultoDay}
+                            setCultoDay={setCultoDay} />
+                        </CalendarComponent>
+                </div>
+            </Container>
         </>
     )
 }

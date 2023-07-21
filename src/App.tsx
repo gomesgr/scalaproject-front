@@ -1,9 +1,9 @@
-import Container from "./components/Container"
-import SideBar from "./components/SideBar"
 import CalendarPage from "./components/pages/CalendarPage"
+import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { Culto, Funcao, Membro, urlCulto, urlFuncao, urlMembro } from "./components/Constants"
+import LoginPage from "./components/pages/LoginPage"
 
 
 function App() {
@@ -26,11 +26,12 @@ function App() {
     }, [])
 
     return (
-        <Container>
-            <SideBar />
-            <CalendarPage funcoes={funcoes} membros={membros} cultos={cultos} />
-        </Container>
-
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<LoginPage />}></Route>
+                <Route path='calendar' element={<CalendarPage funcoes={funcoes} membros={membros} cultos={cultos} />} />
+            </Routes>
+        </BrowserRouter>
     )
 }
 

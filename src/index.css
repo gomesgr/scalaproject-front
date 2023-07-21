@@ -12,7 +12,7 @@
     /* SIDEBAR */
 
     #sidebar {
-        @apply h-full w-[20rem] shadow-md justify-start gap-y-5 flex flex-col text-xl py-5;
+        @apply h-full w-[20rem] justify-start gap-y-5 flex flex-col text-xl py-5;
     }
 
     #sidebar div {

@@ -2,7 +2,7 @@ function Container(props: any) {
     return (
         <>
             <div id='container' className='container shadow-xl
-                flex flex-row h-screen'>
+                h-screen bg-slate-200'>
                 {props.children}
             </div>
         </>

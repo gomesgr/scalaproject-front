@@ -59,7 +59,7 @@ function CalendarComponent(props: any) {
           *  Div que contém o Calendário
           *
         */}
-        <div id='calendar'>
+        <div id='calendar' className=''>
             <div>
                 <div>
                     <button className='hover:text-accentColor' onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
