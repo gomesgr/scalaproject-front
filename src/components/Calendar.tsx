@@ -6,7 +6,7 @@ import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
 import { Culto, CultoBool } from './Constants'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
@@ -63,7 +63,7 @@ function CalendarComponent(props: any) {
         <div id='calendar'>
             <div>
                 <div>
-                    <button className='hover:text-accentColor' onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
+                    <button onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
                         <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'inline' }} />} />
                     </button>
                     
@@ -71,22 +71,22 @@ function CalendarComponent(props: any) {
                         {calendar.format('MMMM [de] yyyy')}
                     </div>
 
-                    <button className='hover:text-accentColor' onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
+                    <button onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
                         <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'inline' }} />} />
                     </button>
                 </div>
                 <button
-                    className='px-5 py-1 text-[20px]'>
+                    className='px-2 text-xl'>
                     Usuário
                 </button>
-                <Link to='/'>
+                <NavLink to='/'>
                     <button>
-                        <Icon type={<RiShutDownLine size={24} />} />
+                        <Icon type={<RiShutDownLine size={24} style={{ display: 'inline' }}/>} />
                     </button>
-                </Link>
+                </NavLink>
             </div>
         <table>
-            <tr className='text-black bg-inherit text-xl h-10'>
+            <tr className='bg-inherit text-xl h-10'>
                 {weekDays.map(weekDay => <th>{weekDay}</th>)}
             </tr>
                 {drawCalendar()}

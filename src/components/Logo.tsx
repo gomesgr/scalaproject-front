@@ -1,8 +1,8 @@
 import SVGLogo from '../assets/logo.svg'
-function Logo() {
+function Logo(props: any) {
     return (
         <>
-            <img src={SVGLogo} alt='Logo' className='w-12 md:w-max'></img>
+            <img src={SVGLogo} alt='Logo' className={`w-12 md:w-max ${props.classes}`}></img>
         </>
     )
 

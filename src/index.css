@@ -73,7 +73,7 @@
     }
 
     #cell-options {
-        @apply absolute h-3/6 w-4/6 p-10 border-2 border-slate-500 bg-secondary m-auto 
+        @apply absolute h-3/6 w-4/6 p-10 border-2 border-primary bg-secondary mx-auto 
             left-0 right-0 top-40 flex flex-row shadow-md rounded-md justify-between;
     }
 }

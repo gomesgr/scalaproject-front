@@ -9,22 +9,20 @@ export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
     const membros: Membro[] = props.membros
     const culto: Culto = props.cellData.culto
-    const [trabalha, setTrabalha] = useState({} as Trabalha)
+    const [trabalha, setTrabalha] = useState({} as Trabalha | undefined)
 
     
     useEffect(() => {
-        if (culto) {
-            axios
-            .get(`${urlTrabalha}?data=${culto.data}`)
-            .then(data => setTrabalha(data.data))
-            .catch(error => console.error(error))
-        } else {
-            axios
-                .get(`${urlTrabalha}`)
-                .then(data => setTrabalha(data.data))
-                .catch(error => console.error(error))
-        }
-    }, [])
+        axios
+        .get(`${urlTrabalha}?data=${culto.data}`)
+        .then(data => setTrabalha(data.data))
+            .catch(error => {
+                console.error(error)
+                setTrabalha(undefined)
+            })
+        
+        console.log(trabalha)
+    }, [culto])
 
 
     const close = () => {
@@ -56,9 +54,11 @@ export default function MonthCalendarCellOptions(props: any) {
                     <SelectMembers funcoes={funcoes} membros={membros} />
                     <button className='bg-accentColor h-10 w-40 col-span-2 rounded-sm p-1 text-white font-medium hover:bg-windowColor'>Adicionar evento</button>
                 </div>
-                <button onClick={close}>
-                        <Icon classes={'text-red-500 hover:text-windowColor'} type={<FaTimes style={{display: 'inline'}} size={28}/>}/>
-                </button>
+                <div>
+                    <button className='bg-transparent' onClick={close}>
+                        <Icon classes='text-red-500' type={<FaTimes size={28}/>}/>
+                    </button>
+                </div>
             </div>        
         )    
     }  
