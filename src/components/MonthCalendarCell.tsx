@@ -31,9 +31,9 @@ function MonthCalendarCell(props: any) {
 
         return <>
             {isExtraDay(props.index, day)
-                ? (<span className='text-unselectedText'>{day}</span>)
+                ? (<span className='text-secondary'>{day}</span>)
                 : (isToday(day, month, year)
-                    ? <span className='text-accentColor'>{day}</span>
+                    ? <span className='text-primary font-medium'>{day}</span>
                     : <span>{day}</span>)
             }
             <div>
@@ -45,7 +45,7 @@ function MonthCalendarCell(props: any) {
     const cell = ({ dia: day, hora: 0, membros: [] as Membro[], culto: {} as Culto })
     if (culto) {
         return (
-            <td id='cell' className='bg-accentColor text-white' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
+            <td id='cell' className='bg-primary text-secondary' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
                 <div className='bg-inherit'>
                 {cellDataBuilder()}
             </div>

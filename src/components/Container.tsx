@@ -1,8 +1,7 @@
 function Container(props: any) {
     return (
         <>
-            <div id='container' className='container shadow-xl
-                h-screen bg-slate-200'>
+            <div id='container' className='flex flex-row container h-screen bg-background'>
                 {props.children}
             </div>
         </>

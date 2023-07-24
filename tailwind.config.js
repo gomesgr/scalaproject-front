@@ -8,20 +8,23 @@ export default {
   theme: {
     extend: {
       colors: {
-        pageBackground: '#242230',
-        accentColor: '#C15C41',
-        containerColor: '#8A89987A',
-        windowColor: '#B9BDC9',
-        unselectedText: '#929292',
+        'text': '#010304',
+        'background': '#e3f0f8',
+        'primary': '#1f577a',
+        'secondary': '#d2e7f3',
+        'accent': '#338ec7',
       }
     },
     container: {
         center: true
     },
     fontFamily: {
-      'sans': 'Poppins'
+        // 'sans': 'Exo 2',
+        'sans-serif': 'Exo 2'
     }
   },
-  plugins: [],
+    plugins: [
+      require('@tailwindcss/forms')
+  ],
 }
 

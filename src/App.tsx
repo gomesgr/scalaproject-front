@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import axios from 'axios'
 import { Culto, Funcao, Membro, urlCulto, urlFuncao, urlMembro } from "./components/Constants"
 import LoginPage from "./components/pages/LoginPage"
+import CultoPage from "./components/pages/CultoPage"
 
 
 function App() {
@@ -29,7 +30,8 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/' element={<LoginPage />}></Route>
-                <Route path='calendar' element={<CalendarPage funcoes={funcoes} membros={membros} cultos={cultos} />} />
+                <Route path='/calendario' element={<CalendarPage funcoes={funcoes} membros={membros} cultos={cultos} />} />
+                <Route path='/cultos' element={<CultoPage />} />
             </Routes>
         </BrowserRouter>
     )

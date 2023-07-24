@@ -4,7 +4,7 @@ import SideBar from '../SideBar'
 import CalendarComponent from './../Calendar'
 import {useState} from 'react'
 
-function CalendarPage(props: any) {
+export default function CalendarPage(props: any) {
     const [cellState, setCellState] = useState(false)
     const [cellData, setCellData] = useState({})
     const [cultoDay, setCultoDay] = useState({})
@@ -26,11 +26,9 @@ function CalendarPage(props: any) {
                             membros={props.membros}
                             cultoDay={cultoDay}
                             setCultoDay={setCultoDay} />
-                        </CalendarComponent>
+                    </CalendarComponent>
                 </div>
             </Container>
         </>
     )
 }
-
-export default CalendarPage

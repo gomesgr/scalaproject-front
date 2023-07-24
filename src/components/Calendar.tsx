@@ -1,16 +1,17 @@
 import 'moment/dist/locale/pt-br'
-import {useEffect, useState} from 'react'
+import {useState} from 'react'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
 import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
 import { Culto, CultoBool } from './Constants'
+import { Link } from 'react-router-dom'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
     const [calendar, setCalendar] = useState(moment())
-    const weekDays: string[] = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado']
+    const weekDays: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
     const [cultoDay, setCultoDay] = useState('')
     const cultos: Culto[] = props.cultos
 
@@ -59,17 +60,15 @@ function CalendarComponent(props: any) {
           *  Div que contém o Calendário
           *
         */}
-        <div id='calendar' className=''>
+        <div id='calendar'>
             <div>
                 <div>
                     <button className='hover:text-accentColor' onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
                         <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'inline' }} />} />
                     </button>
                     
-                    <div className='bg-inherit'>
-                        <input type='text' className='w-36 text-center bg-inherit border border-slate-200 rounded-sm' name='date'
-                            onFocus={(e) => e.target.type = 'date'}
-                            onBlur={(e) => { e.target.type = 'text'; e.target.value = `${calendar.month()}`}}></input>
+                    <div className='bg-inherit m-auto font-medium capitalize'>
+                        {calendar.format('MMMM [de] yyyy')}
                     </div>
 
                     <button className='hover:text-accentColor' onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
@@ -77,12 +76,14 @@ function CalendarComponent(props: any) {
                     </button>
                 </div>
                 <button
-                    className='font-medium hover:bg-slate-300 text-white rounded-md bg-accentColor px-5 py-1 text-[20px]'>
+                    className='px-5 py-1 text-[20px]'>
                     Usuário
                 </button>
-                <button className='hover:text-accentColor'>
-                    <Icon type={<RiShutDownLine size={ 24 } />} />
-                </button>
+                <Link to='/'>
+                    <button>
+                        <Icon type={<RiShutDownLine size={24} />} />
+                    </button>
+                </Link>
             </div>
         <table>
             <tr className='text-black bg-inherit text-xl h-10'>

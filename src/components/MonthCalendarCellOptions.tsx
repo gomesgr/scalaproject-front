@@ -24,7 +24,7 @@ export default function MonthCalendarCellOptions(props: any) {
                 .then(data => setTrabalha(data.data))
                 .catch(error => console.error(error))
         }
-    })
+    }, [])
 
 
     const close = () => {
@@ -33,7 +33,7 @@ export default function MonthCalendarCellOptions(props: any) {
 
     if (props.cellState) {
         return (
-            <div id='cell-options' className="">
+            <div id='cell-options'>
                 <div className='bg-inherit'>
                     {
                         props.cellData.culto.data
