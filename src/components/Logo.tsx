@@ -5,8 +5,6 @@ function Logo(props: any) {
             <img src={SVGLogo} alt='Logo' className={`w-12 md:w-max ${props.classes}`}></img>
         </>
     )
-
-
 }
 
 export default Logo

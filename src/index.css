@@ -15,9 +15,8 @@
         @apply bg-background text-text subpixel-antialiased;
     }
 
-    button,
     #loginBtn {
-        @apply bg-primary hover:bg-accent text-white rounded-lg font-medium p-1;
+        @apply bg-primary hover:bg-accent text-white rounded-lg font-medium pl-1 pr-5 py-1;
     }
 
     /* SIDEBAR */

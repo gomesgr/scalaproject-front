@@ -14,8 +14,25 @@ function App() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path='/' element={<LoginPage setUsuario={setUsuario} usuario={usuario} setPerfil={setPerfil} setAuth={setAuth} /> }/>
-                <Route path='/calendario' element={<CalendarPage auth={auth} setAuth={setAuth} perfil={perfil} setUsuario={setUsuario} setPerfil={setPerfil} />} />
+                
+                {/* Login */}
+                <Route path='/' element={<LoginPage
+                    setUsuario={setUsuario}
+                    usuario={usuario}
+                    setPerfil={setPerfil}
+                    setAuth={setAuth}
+                    auth={auth}
+                    perfil={perfil} />} />
+                
+                {/* Calendário */}
+                <Route path='/calendario' element={<CalendarPage
+                    auth={auth}
+                    setAuth={setAuth}
+                    perfil={perfil}
+                    setUsuario={setUsuario}
+                    setPerfil={setPerfil} />} />
+                
+                {/* Cultos */}
                 <Route path='/cultos' element={<CultoPage />} />
             </Routes>
         </BrowserRouter>

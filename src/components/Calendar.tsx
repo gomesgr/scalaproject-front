@@ -5,7 +5,7 @@ import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
-import { Culto, CultoBool } from './Constants'
+import { Culto, CultoBool, GoogleProfile } from './Constants'
 import { useNavigate } from "react-router-dom";
 import { googleLogout } from '@react-oauth/google';
 
@@ -14,6 +14,9 @@ function CalendarComponent(props: any) {
     const [calendar, setCalendar] = useState(moment())
     const weekDays: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
     const cultos: Culto[] = props.cultos
+    const navigate = useNavigate()
+
+    const perfil: GoogleProfile = JSON.parse(localStorage.getItem('perfil')!)
 
     const temCulto =(day: number, month: number): CultoBool => {
         for (let culto of cultos) {
@@ -26,7 +29,7 @@ function CalendarComponent(props: any) {
 
     const mapWeek = (week: string[], index: number) => {
         return week.map((day) => {
-            var cultoBool = temCulto(+day, calendar.month())
+            const cultoBool = temCulto(+day, calendar.month())
             return (cultoBool.existe
                 ? (
                 <MonthCalendarCell
@@ -55,8 +58,6 @@ function CalendarComponent(props: any) {
                 </tr>))
     }
 
-    const navigate = useNavigate()
-
     const logOut = () => {
         googleLogout()
         props.setPerfil(null)
@@ -75,23 +76,25 @@ function CalendarComponent(props: any) {
             <div>
                 <div>
                     <button onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
-                        <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'inline' }} />} />
+                        <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'block' }} />} />
                     </button>
                     
-                    <div className='bg-inherit m-auto font-medium capitalize'>
+                    <div className='bg-inherit my-auto font-medium capitalize w-24'>
                         {calendar.format('MMMM [de] yyyy')}
                     </div>
 
                     <button onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
-                        <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'inline' }} />} />
+                        <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'block' }} />} />
                     </button>
                 </div>
-                <button
-                    className='px-2 text-xl'>
-                    {props.perfil.given_name}
+                <button className='px-5 text-xl w-5/6 h-full'>
+                    <div className='flex flex-row gap-x-2 justify-center'>
+                        <img className='rounded-full' width={24} src={perfil.picture} />
+                        {perfil.given_name}
+                    </div>
                 </button>
-                <button onClick={() => logOut()}>
-                    <Icon type={<RiShutDownLine size={24} style={{ display: 'inline' }}/>} />
+                <button className='h-full' onClick={() => logOut()}>
+                    <Icon type={<RiShutDownLine size={24} style={{ display: 'block' }}/>} />
                 </button>
             </div>
         <table>

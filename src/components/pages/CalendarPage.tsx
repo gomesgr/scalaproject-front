@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { urlFuncao, urlMembro, urlCulto, urlTrabalha, Culto, Funcao, Membro, Trabalha } from '../Constants'
+import { urlFuncao, urlMembro, urlCulto, urlTrabalha, Culto, Funcao, Membro, Trabalha, GoogleUser, GoogleProfile } from '../Constants'
 import Container from '../Container'
 import MonthCalendarCellOptions from '../MonthCalendarCellOptions'
 import SideBar from '../SideBar'
@@ -17,7 +17,7 @@ export default function CalendarPage(props: any) {
     const [cultos, setCultos] = useState([{} as Culto])
     const [trabalham, setTrabalham] = useState([{} as Trabalha])
 
-    if (!props.auth) {
+    if (!localStorage.getItem('perfil')) {
         return <Navigate replace to='/' />
     }
 
