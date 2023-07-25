@@ -6,13 +6,13 @@ import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
 import { Culto, CultoBool } from './Constants'
-import { Link, NavLink } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { googleLogout } from '@react-oauth/google';
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
     const [calendar, setCalendar] = useState(moment())
     const weekDays: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
-    const [cultoDay, setCultoDay] = useState('')
     const cultos: Culto[] = props.cultos
 
     const temCulto =(day: number, month: number): CultoBool => {
@@ -55,6 +55,17 @@ function CalendarComponent(props: any) {
                 </tr>))
     }
 
+    const navigate = useNavigate()
+
+    const logOut = () => {
+        googleLogout()
+        props.setPerfil(null)
+        props.setUsuario(null)
+        props.setAuth(false)
+        localStorage.clear()
+        navigate('/')
+    }
+
     return <> 
         {/* 
           *  Div que contém o Calendário
@@ -77,13 +88,11 @@ function CalendarComponent(props: any) {
                 </div>
                 <button
                     className='px-2 text-xl'>
-                    Usuário
+                    {props.perfil.given_name}
                 </button>
-                <NavLink to='/'>
-                    <button>
-                        <Icon type={<RiShutDownLine size={24} style={{ display: 'inline' }}/>} />
-                    </button>
-                </NavLink>
+                <button onClick={() => logOut()}>
+                    <Icon type={<RiShutDownLine size={24} style={{ display: 'inline' }}/>} />
+                </button>
             </div>
         <table>
             <tr className='bg-inherit text-xl h-10'>

@@ -57,3 +57,23 @@ export type Trabalha = {
 }
 
 export const urlTrabalha: string = 'http://localhost:8080/api/trabalha'
+
+export type GoogleUser = {
+    access_token: string,
+    authuser: string,
+    expires_in: number,
+    prompt: string,
+    scope: string,
+    token_type: string
+}
+
+export type GoogleProfile = {
+    email: string,
+    family_name: string,
+    given_name: string,
+    id: string,
+    locale: string,
+    name: string,
+    picture: string,
+    verified_email: boolean
+}

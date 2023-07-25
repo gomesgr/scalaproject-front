@@ -1,12 +1,8 @@
 import {FaTimes} from 'react-icons/fa'
 import Icon from './Icon'
-import { Culto, Funcao, Membro, Trabalha, urlTrabalha } from './Constants'
+import { Culto, Funcao, Membro, Trabalha } from './Constants'
 import SelectMembers from './SelectMembers'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
 
-// TODO
-// ARRUMAR UMA MANEIRA DE DAR GET NO *TRABALHA* DO MÊS SEMPRE Q RENDERIZAR O CALENDÁRIO DO MÊS
 export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
     const membros: Membro[] = props.membros

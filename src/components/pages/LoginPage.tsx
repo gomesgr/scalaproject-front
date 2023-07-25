@@ -2,7 +2,14 @@ import { BiLogoGoogle } from 'react-icons/bi'
 import { NavLink } from "react-router-dom";
 import Container from "../Container";
 import Logo from "../Logo";
-function LoginPage() {
+import BtnGoogleLogin from '../BtnGoogleLogin';
+import { useEffect } from 'react';
+import axios from 'axios';
+
+function LoginPage(props: any) {
+    
+    
+
     return (
         <>
             <Container>
@@ -16,12 +23,7 @@ function LoginPage() {
                             <p className="tracking-wider">Entre com sua conta do Google</p>
                         </div>
                         <div className="text-center mt-5">
-                                <NavLink to='/calendario'>
-                                    <div id='loginBtn' className="flex flex-row place-content-center items-center">
-                                        <span><BiLogoGoogle size={50}/> </span>
-                                        Entre com o Google
-                                    </div>
-                                </NavLink>
+                            <BtnGoogleLogin setAuth={props.setAuth} setUsuario={ props.setUsuario } usuario={props.usuario} setPerfil={ props.setPerfil } />
                         </div>
                     </div>
                 </div>
