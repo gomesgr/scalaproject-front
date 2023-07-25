@@ -5,28 +5,28 @@ import SelectMembers from './SelectMembers'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 
+// TODO
+// ARRUMAR UMA MANEIRA DE DAR GET NO *TRABALHA* DO MÊS SEMPRE Q RENDERIZAR O CALENDÁRIO DO MÊS
 export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
     const membros: Membro[] = props.membros
     const culto: Culto = props.cellData.culto
-    const [trabalha, setTrabalha] = useState({} as Trabalha | undefined)
-
-    
-    useEffect(() => {
-        axios
-        .get(`${urlTrabalha}?data=${culto.data}`)
-        .then(data => setTrabalha(data.data))
-            .catch(error => {
-                console.error(error)
-                setTrabalha(undefined)
-            })
-        
-        console.log(trabalha)
-    }, [culto])
-
+    const trabalham: Trabalha[] = props.trabalham
 
     const close = () => {
         props.setCellState(false)
+    }
+
+
+    // TODO
+    // Aqui recebo TODAS as tuplas presentes no banco de dados, o que é inimaginavelmente não performático, arrumar depois
+    const euTrabalhei = (): string => {
+        for (let trabalha of trabalham) {
+            if (trabalha.culto.data === culto.data) {
+                return trabalha.exerce.membro.nome
+            }
+        }
+        return ''
     }
 
     if (props.cellState) {
@@ -45,9 +45,7 @@ export default function MonthCalendarCellOptions(props: any) {
                         {props.cellData.membros}
                     </div>
                     <div>
-                        {
-                            trabalha ? trabalha.exerce.membro.nome : ''
-                        }
+                        {euTrabalhei()}
                     </div>
                 </div>
                 <div className='bg-inherit grid grid-rows-6 grid-cols-2 justify-items-center gap-y-2'>

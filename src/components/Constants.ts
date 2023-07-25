@@ -56,4 +56,4 @@ export type Trabalha = {
     culto: Culto
 }
 
-export const urlTrabalha: string = 'http://localhost:8080/api/trabalha/teste'
+export const urlTrabalha: string = 'http://localhost:8080/api/trabalha'

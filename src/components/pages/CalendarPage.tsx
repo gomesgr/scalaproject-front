@@ -1,3 +1,4 @@
+import { Trabalha } from '../Constants'
 import Container from '../Container'
 import MonthCalendarCellOptions from '../MonthCalendarCellOptions'
 import SideBar from '../SideBar'
@@ -24,6 +25,8 @@ export default function CalendarPage(props: any) {
                             setCellState={setCellState}
                             funcoes={props.funcoes}
                             membros={props.membros}
+                            cultos={props.cultos}
+                            trabalham={props.trabalham}
                             cultoDay={cultoDay}
                             setCultoDay={setCultoDay} />
                     </CalendarComponent>
