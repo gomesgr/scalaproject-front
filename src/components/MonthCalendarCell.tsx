@@ -1,14 +1,18 @@
 import 'moment/dist/locale/pt-br'
 import moment from 'moment'
 import { Culto, Membro } from './Constants'
+import { useEffect, useState } from 'react'
 
 moment.locale('pt-br')
 
 function MonthCalendarCell(props: any) {
+    const moment: moment.Moment = props.moment.clone()
     const day: number = props.day
-    const month: number = props.moment.month()
-    const year: number = props.moment.year()
     const culto: Culto = props.culto
+
+
+    console.log(moment.month())
+    const [extra, setExtra] = useState(true)
 
     const showCellOptions = (options: Function, toggler: Function) => {
         toggler(true) 
@@ -17,6 +21,21 @@ function MonthCalendarCell(props: any) {
             options(newCell)
         } else {
             options(cell)
+        }
+    }
+
+    const isExtraDay = (week:number, date:number) => {
+        if (week === 0 && date > 10) {
+            
+            return true
+        } else if (week === 5 && date < 10) {
+            
+            return true
+        } else if (week === 4 && date < 10) {
+            
+            return true
+        } else {
+            return false
         }
     }
 
@@ -30,35 +49,37 @@ function MonthCalendarCell(props: any) {
         }
 
         return <>
-            {isExtraDay(props.index, day)
-                ? (<span className='text-secondary'>{day}</span>)
-                : (isToday(day, month, year)
-                    ? <span className='text-primary font-medium'>{day}</span>
-                    : <span>{day}</span>)
-            }
-            <div>
-                {temCulto()}
-            </div>
+            <span>{day}</span>
+            <span>{temCulto()}</span>
         </>
     }
 
     const cell = ({ dia: day, hora: 0, membros: [] as Membro[], culto: {} as Culto })
+    
+    if (isExtraDay(props.index, day)) {
+        return (
+            <td id='disabled-cell'>
+            </td>
+        )
+    }
+
     if (culto) {
         return (
             <td id='cell' className='bg-primary text-secondary' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
-                <div className='bg-inherit'>
-                {cellDataBuilder()}
-            </div>
+                <div >
+                    {cellDataBuilder()}
+                </div>
             </td>
         )
     }
     return (
         <td id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}>
-        <div className='bg-inherit w-full h-full'>
-            {cellDataBuilder()}
+            <div >
+                {cellDataBuilder()}
             </div>
         </td>
     )
+
 }
 
 function isToday(day: number, month: number, year: number): boolean {
@@ -67,16 +88,6 @@ function isToday(day: number, month: number, year: number): boolean {
             (year == moment().year()))
 }
 
-function isExtraDay(week:number, date:number): boolean {
-    if (week === 0 && date > 10) {
-        return true;
-    } else if (week === 5 && date < 10) {
-        return true;
-    } else if (week === 4 && date < 10) {
-        return true;
-    } else {
-        return false;
-    }
-}
+
 
 export default MonthCalendarCell

@@ -19,6 +19,14 @@
         @apply bg-primary hover:bg-accent text-white rounded-lg font-medium pl-1 pr-5 py-1;
     }
 
+    #btnAction {
+        @apply bg-primary hover:bg-accent rounded-full text-secondary h-auto p-1;
+    }
+
+    #btnClose > span {
+        @apply hover:text-primary;
+    }
+
     /* SIDEBAR */
 
     #sidebar {
@@ -43,11 +51,7 @@
     }
 
     #calendar > div {
-        @apply flex items-center justify-around p-1 gap-5 px-10;
-    }
-
-    #calendar > div > div {
-        @apply w-full flex flex-row justify-end gap-10 bg-inherit;
+        @apply flex flex-row items-center justify-around p-1 gap-x-10 px-10;
     }
 
     #calendar table {
@@ -67,8 +71,12 @@
         hover:text-secondary;
     }
 
+    #disabled-cell {
+        @apply border border-secondary rounded-sm;
+    }
+
     #cell > div {
-        @apply grid grid-flow-row justify-stretch h-20;
+        @apply flex flex-col gap-x-5 w-full h-24 justify-around items-center;
     }
 
     #cell-options {

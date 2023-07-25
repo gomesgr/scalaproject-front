@@ -46,11 +46,11 @@ export default function MonthCalendarCellOptions(props: any) {
                 </div>
                 <div className='bg-inherit grid grid-rows-6 grid-cols-2 justify-items-center gap-y-2'>
                     <SelectMembers funcoes={funcoes} membros={membros} />
-                    <button className='bg-accentColor h-10 w-40 col-span-2 rounded-sm p-1 text-white font-medium hover:bg-windowColor'>Adicionar evento</button>
+                    <button id='btnAction' className='bg-accentColor h-10 w-40 col-span-2 rounded-sm p-1 text-white font-medium hover:bg-windowColor'>Adicionar evento</button>
                 </div>
                 <div>
-                    <button className='bg-transparent' onClick={close}>
-                        <Icon classes='text-red-500' type={<FaTimes size={28}/>}/>
+                    <button id='btnClose' onClick={close}>
+                        <Icon classes='text-accent' type={<FaTimes size={28}/>}/>
                     </button>
                 </div>
             </div>        

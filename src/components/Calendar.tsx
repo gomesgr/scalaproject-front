@@ -8,6 +8,7 @@ import Icon from './Icon'
 import { Culto, CultoBool, GoogleProfile } from './Constants'
 import { useNavigate } from "react-router-dom";
 import { googleLogout } from '@react-oauth/google';
+import MonthEmptyCell from './MonthEmptyCell'
 
 moment.locale('pt-br')
 function CalendarComponent(props: any) {
@@ -27,28 +28,42 @@ function CalendarComponent(props: any) {
         return {culto: null, existe: false}
     }
 
+    const isExtraDay = (week:number, date:number) => {
+        if (week === 0 && date > 10) {
+            return true
+        } else if (week === 5 && date < 10) {
+            return true
+        } else if (week === 4 && date < 10) {
+            return true
+        } else {
+            return false
+        }
+    }
+
     const mapWeek = (week: string[], index: number) => {
         return week.map((day) => {
             const cultoBool = temCulto(+day, calendar.month())
-            return (cultoBool.existe
-                ? (
-                <MonthCalendarCell
-                    day={day}
-                    index={index}
-                    moment={calendar}
-                    setCellOptionsState={props.setCellState}
-                    setCellOptionsData={props.setCellData}
-                    culto={cultoBool.culto} />
+                return (cultoBool.existe
+                    ? (
+                        <MonthCalendarCell
+                            day={day}
+                            index={index}
+                            moment={calendar}
+                            setCellOptionsState={props.setCellState}
+                            setCellOptionsData={props.setCellData}
+                            culto={cultoBool.culto} />
+                    )
+                    : (
+                        <MonthCalendarCell
+                            day={day}
+                            index={index}
+                            moment={calendar}
+                            setCellOptionsState={props.setCellState}
+                            setCellOptionsData={props.setCellData} />
+                    )
                 )
-                : (
-                <MonthCalendarCell
-                    day={day}
-                    index={index}
-                    moment={calendar}
-                    setCellOptionsState={props.setCellState}
-                    setCellOptionsData={props.setCellData} />
-                )
-        )})
+            }
+)
     }
 
     const drawCalendar = () => {
@@ -74,28 +89,27 @@ function CalendarComponent(props: any) {
         */}
         <div id='calendar'>
             <div>
-                <div>
-                    <button onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
-                        <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'block' }} />} />
-                    </button>
-                    
-                    <div className='bg-inherit my-auto font-medium capitalize w-24'>
-                        {calendar.format('MMMM [de] yyyy')}
-                    </div>
-
-                    <button onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
-                        <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'block' }} />} />
-                    </button>
-                </div>
-                <button className='px-5 text-xl w-5/6 h-full'>
-                    <div className='flex flex-row gap-x-2 justify-center'>
-                        <img className='rounded-full' width={24} src={perfil.picture} />
-                        {perfil.given_name}
-                    </div>
+                <button id='btnAction' onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
+                    <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'block' }} />} />
                 </button>
-                <button className='h-full' onClick={() => logOut()}>
+                
+                <div className='text-center my-auto font-medium capitalize md:w-24'>
+                    {calendar.format('MMMM [de] yyyy')}
+                </div>
+
+                <button id='btnAction' onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
+                    <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'block' }} />} />
+                </button>
+
+                <button id='btnAction' onClick={() => logOut()}>
                     <Icon type={<RiShutDownLine size={24} style={{ display: 'block' }}/>} />
                 </button>
+
+                <div className='flex flex-row gap-x-4 items-center'>
+                    <img className='rounded-full ring ring-primary' width={30} src={perfil.picture} />
+                    <p className='ring ring-primary rounded-full p-1'>{perfil.given_name}</p>
+                </div>
+                
             </div>
         <table>
             <tr className='bg-inherit text-xl h-10'>

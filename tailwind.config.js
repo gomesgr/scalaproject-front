@@ -12,11 +12,11 @@ export default {
                 '200': '2.00'
             },
         colors: {
-            'text': '#010304',
-            'background': '#e3f0f8',
-            'primary': '#1f577a',
-            'secondary': '#d2e7f3',
-            'accent': '#338ec7',
+            'text': '#0b240a',
+'background': '#fbfefb',
+'primary': '#272d90',
+'secondary': '#d5f3d3',
+'accent': '#c4363d',
         }
         },
         container: {
