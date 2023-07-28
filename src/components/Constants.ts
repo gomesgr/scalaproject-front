@@ -25,7 +25,7 @@ export type Membro = {
 }
 export const urlMembro: string = 'http://localhost:8080/api/membro'
 
-export type CultoBool = {
+export type CultosBool = {
     culto: Culto | null,
     existe: boolean
 }
@@ -77,3 +77,5 @@ export type GoogleProfile = {
     picture: string,
     verified_email: boolean
 }
+
+export interface ChaveValorTrabalha {data: number, valor: Trabalha}

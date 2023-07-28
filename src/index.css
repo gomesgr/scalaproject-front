@@ -68,7 +68,7 @@
 
     #cell {
         @apply border border-secondary rounded-sm cursor-pointer hover:scale-110 hover:bg-accent
-        hover:text-secondary;
+        hover:text-secondary h-24;
     }
 
     #disabled-cell {
@@ -76,11 +76,15 @@
     }
 
     #cell > div {
-        @apply flex flex-col gap-x-5 w-full h-24 justify-around items-center;
+        @apply grid grid-flow-row h-auto justify-start;
+    }
+
+    #cell:has(#culto) {
+        @apply bg-primary text-secondary;
     }
 
     #cell-options {
-        @apply absolute h-3/6 w-4/6 p-10 border-2 border-primary bg-secondary mx-auto 
-            left-0 right-0 top-40 flex flex-row shadow-md rounded-md justify-between;
+        @apply absolute h-4/6 w-4/6 p-10 border-2 border-primary bg-secondary mx-auto 
+            left-0 right-0 top-40 grid grid-flow-col shadow-md rounded-md justify-stretch gap-x-5;
     }
 }

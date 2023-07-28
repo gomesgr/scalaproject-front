@@ -6,16 +6,18 @@ import SideBar from '../SideBar'
 import CalendarComponent from './../Calendar'
 import {useEffect, useState} from 'react'
 import { Navigate } from 'react-router-dom'
+import moment from 'moment'
+
+moment.locale('pt-br')
 
 export default function CalendarPage(props: any) {
     const [cellState, setCellState] = useState(false)
-    const [cellData, setCellData] = useState({})
-    const [cultoDay, setCultoDay] = useState({})
-
+    const [cellData, setCellData] = useState([])
     const [funcoes, setFuncoes] = useState([{} as Funcao])
     const [membros, setMembros] = useState([{} as Membro])
     const [cultos, setCultos] = useState([{} as Culto])
     const [trabalham, setTrabalham] = useState([{} as Trabalha])
+    const [calendar, setCalendar] = useState(moment())
 
     if (!localStorage.getItem('perfil')) {
         return <Navigate replace to='/' />
@@ -34,9 +36,8 @@ export default function CalendarPage(props: any) {
             .then(result => setCultos(result.data))
             .catch(error => console.error(error))
         
-        axios.get(urlTrabalha)
-            .then(result => setTrabalham(result.data))
-            .catch(error => console.error(error))
+        
+        
     }, [])
 
     return (
@@ -51,17 +52,18 @@ export default function CalendarPage(props: any) {
                         setPerfil={props.setPerfil}
                         setUsuario={props.setUsuario}
                         perfil={props.perfil}
-                        setAuth={props.setAuth}>
+                        setAuth={props.setAuth}
+                        calendar={calendar}
+                        setCalendar={setCalendar}>
                         <MonthCalendarCellOptions 
                             cellState={cellState}
                             cellData={cellData}
                             setCellState={setCellState}
                             funcoes={funcoes}
                             membros={membros}
-                            cultos={cultos}
-                            trabalham={trabalham}
-                            cultoDay={cultoDay}
-                            setCultoDay={setCultoDay} />
+                            trabalham={trabalham as Trabalha[]}
+                            setTrabalham={setTrabalham}
+                            calendar={calendar} />
                     </CalendarComponent>
                 </div>
             </Container>

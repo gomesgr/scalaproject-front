@@ -5,71 +5,37 @@ import {RiShutDownLine} from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
-import { Culto, CultoBool, GoogleProfile } from './Constants'
+import { Culto, CultosBool, GoogleProfile } from './Constants'
 import { useNavigate } from "react-router-dom";
 import { googleLogout } from '@react-oauth/google';
-import MonthEmptyCell from './MonthEmptyCell'
 
-moment.locale('pt-br')
+
 function CalendarComponent(props: any) {
-    const [calendar, setCalendar] = useState(moment())
     const weekDays: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
     const cultos: Culto[] = props.cultos
     const navigate = useNavigate()
 
     const perfil: GoogleProfile = JSON.parse(localStorage.getItem('perfil')!)
 
-    const temCulto =(day: number, month: number): CultoBool => {
-        for (let culto of cultos) {
-            let data = new Date(culto.data)
-            if (data.getDate() == day && data.getMonth() == month)
-                return {culto: culto, existe: true}
-        }
-        return {culto: null, existe: false}
-    }
-
-    const isExtraDay = (week:number, date:number) => {
-        if (week === 0 && date > 10) {
-            return true
-        } else if (week === 5 && date < 10) {
-            return true
-        } else if (week === 4 && date < 10) {
-            return true
-        } else {
-            return false
-        }
-    }
-
-    const mapWeek = (week: string[], index: number) => {
-        return week.map((day) => {
-            const cultoBool = temCulto(+day, calendar.month())
-                return (cultoBool.existe
-                    ? (
-                        <MonthCalendarCell
-                            day={day}
-                            index={index}
-                            moment={calendar}
-                            setCellOptionsState={props.setCellState}
-                            setCellOptionsData={props.setCellData}
-                            culto={cultoBool.culto} />
-                    )
-                    : (
-                        <MonthCalendarCell
-                            day={day}
-                            index={index}
-                            moment={calendar}
-                            setCellOptionsState={props.setCellState}
-                            setCellOptionsData={props.setCellData} />
-                    )
-                )
-            }
-)
+    const mapWeek = (week: string[], index: number, month: number, year: number) => {
+        const cultosDoMes: Culto[] = cultos.filter(culto => new Date(culto.data).getMonth() === month)
+        return week.map((day) => 
+            <MonthCalendarCell
+                day={day}
+                index={index}
+                month={month}
+                year={year}
+                calendar={props.calendar}
+                setCellOptionsState={props.setCellState}
+                setCellOptionsData={props.setCellData}
+                cultos={cultosDoMes} />
+        )
     }
 
     const drawCalendar = () => {
-        return getCalendar(calendar.month(), calendar.year())!.map((week, index) => (
+        return getCalendar(props.calendar.month(), props.calendar.year())!.map((week, index) => (
                 <tr>
-                {mapWeek(week, index)}
+                    {mapWeek(week, index, props.calendar.month(), props.calendar.year())}
                 </tr>))
     }
 
@@ -89,15 +55,15 @@ function CalendarComponent(props: any) {
         */}
         <div id='calendar'>
             <div>
-                <button id='btnAction' onClick={() => setCalendar(calendar.subtract(1, 'month').clone())}>
+                <button id='btnAction' onClick={() => props.setCalendar(props.calendar.subtract(1, 'month').clone())}>
                     <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'block' }} />} />
                 </button>
                 
                 <div className='text-center my-auto font-medium capitalize md:w-24'>
-                    {calendar.format('MMMM [de] yyyy')}
+                    {props.calendar.format('MMMM [de] yyyy')}
                 </div>
 
-                <button id='btnAction' onClick={() => setCalendar(calendar.add(1, 'month').clone())}>
+                <button id='btnAction' onClick={() => props.setCalendar(props.calendar.add(1, 'month').clone())}>
                     <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'block' }} />} />
                 </button>
 

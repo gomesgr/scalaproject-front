@@ -1,30 +1,27 @@
 import 'moment/dist/locale/pt-br'
 import moment from 'moment'
-import { Culto, Membro } from './Constants'
+import { Culto, CultosBool, Membro } from './Constants'
 import { useEffect, useState } from 'react'
 
 moment.locale('pt-br')
 
 function MonthCalendarCell(props: any) {
-    const moment: moment.Moment = props.moment.clone()
     const day: number = props.day
-    const culto: Culto = props.culto
-
-
-    console.log(moment.month())
-    const [extra, setExtra] = useState(true)
+    const month: number = props.calendar.month()
+    const year: number = 2023
+    const cultos: Culto[] = props.cultos
 
     const showCellOptions = (options: Function, toggler: Function) => {
-        toggler(true) 
-        if (culto) {
-            const newCell = { dia: day, culto: culto }
+        toggler(true)
+        if (cultos.length > 0) {
+            const newCell = { cultos: cultos.filter(culto => new Date(culto.data).getDate() == day), dia: day }
             options(newCell)
         } else {
-            options(cell)
+            options(null)
         }
     }
 
-    const isExtraDay = (week:number, date:number) => {
+    const isExtraDay = (week: number, date: number) => {
         if (week === 0 && date > 10) {
             
             return true
@@ -38,23 +35,6 @@ function MonthCalendarCell(props: any) {
             return false
         }
     }
-
-    const cellDataBuilder = () => {
-
-        const temCulto = (): string => {
-            if (culto) {
-                return culto.nome
-            }
-            return ''
-        }
-
-        return <>
-            <span>{day}</span>
-            <span>{temCulto()}</span>
-        </>
-    }
-
-    const cell = ({ dia: day, hora: 0, membros: [] as Membro[], culto: {} as Culto })
     
     if (isExtraDay(props.index, day)) {
         return (
@@ -63,23 +43,26 @@ function MonthCalendarCell(props: any) {
         )
     }
 
-    if (culto) {
-        return (
-            <td id='cell' className='bg-primary text-secondary' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)} >
-                <div >
-                    {cellDataBuilder()}
+    const a = () => {
+        return cultos.map(culto => {
+
+            return (new Date(culto.data).getDate() == day) 
+                ? <div id='culto'>
+                    {culto.nome}
                 </div>
-            </td>
-        )
+                : <div></div>
+        })
     }
+    
     return (
         <td id='cell' onClick={() => showCellOptions(props.setCellOptionsData, props.setCellOptionsState)}>
-            <div >
-                {cellDataBuilder()}
+            <div>
+                {day}
+                {a()}
             </div>
         </td>
     )
-
+    
 }
 
 function isToday(day: number, month: number, year: number): boolean {
