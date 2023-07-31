@@ -1,14 +1,13 @@
 import 'moment/dist/locale/pt-br'
-import {useState} from 'react'
+import { useState } from 'react'
 import { AiOutlineArrowRight, AiOutlineArrowLeft } from 'react-icons/ai'
-import {RiShutDownLine} from 'react-icons/ri'
+import { RiShutDownLine } from 'react-icons/ri'
 import moment from 'moment'
 import MonthCalendarCell from './MonthCalendarCell'
 import Icon from './Icon'
 import { Culto, CultosBool, GoogleProfile } from './Constants'
-import { useNavigate } from "react-router-dom";
-import { googleLogout } from '@react-oauth/google';
-
+import { useNavigate } from 'react-router-dom'
+import { googleLogout } from '@react-oauth/google'
 
 function CalendarComponent(props: any) {
     const weekDays: string[] = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb']
@@ -17,9 +16,16 @@ function CalendarComponent(props: any) {
 
     const perfil: GoogleProfile = JSON.parse(localStorage.getItem('perfil')!)
 
-    const mapWeek = (week: string[], index: number, month: number, year: number) => {
-        const cultosDoMes: Culto[] = cultos.filter(culto => new Date(culto.data).getMonth() === month)
-        return week.map((day) => 
+    const mapWeek = (
+        week: string[],
+        index: number,
+        month: number,
+        year: number
+    ) => {
+        const cultosDoMes: Culto[] = cultos.filter(
+            (culto) => new Date(culto.data).getMonth() === month
+        )
+        return week.map((day) => (
             <MonthCalendarCell
                 day={day}
                 index={index}
@@ -28,15 +34,24 @@ function CalendarComponent(props: any) {
                 calendar={props.calendar}
                 setCellOptionsState={props.setCellState}
                 setCellOptionsData={props.setCellData}
-                cultos={cultosDoMes} />
-        )
+                cultos={cultosDoMes}
+            />
+        ))
     }
 
     const drawCalendar = () => {
-        return getCalendar(props.calendar.month(), props.calendar.year())!.map((week, index) => (
+        return getCalendar(props.calendar.month(), props.calendar.year())!.map(
+            (week, index) => (
                 <tr>
-                    {mapWeek(week, index, props.calendar.month(), props.calendar.year())}
-                </tr>))
+                    {mapWeek(
+                        week,
+                        index,
+                        props.calendar.month(),
+                        props.calendar.year()
+                    )}
+                </tr>
+            )
+        )
     }
 
     const logOut = () => {
@@ -45,48 +60,91 @@ function CalendarComponent(props: any) {
         props.setUsuario(null)
         props.setAuth(false)
         localStorage.clear()
-        navigate('/')
+        navigate('/scalaproject-front')
     }
 
-    return <> 
-        {/* 
-          *  Div que contém o Calendário
-          *
-        */}
-        <div id='calendar'>
-            <div>
-                <button id='btnAction' onClick={() => props.setCalendar(props.calendar.subtract(1, 'month').clone())}>
-                    <Icon type={<AiOutlineArrowLeft size={24} style={{ display: 'block' }} />} />
-                </button>
-                
-                <div className='text-center my-auto font-medium capitalize md:w-24'>
-                    {props.calendar.format('MMMM [de] yyyy')}
+    return (
+        <>
+            {/*
+             *  Div que contém o Calendário
+             *
+             */}
+            <div id='calendar'>
+                <div>
+                    <button
+                        id='btnAction'
+                        onClick={() =>
+                            props.setCalendar(
+                                props.calendar.subtract(1, 'month').clone()
+                            )
+                        }
+                    >
+                        <Icon
+                            type={
+                                <AiOutlineArrowLeft
+                                    size={24}
+                                    style={{ display: 'block' }}
+                                />
+                            }
+                        />
+                    </button>
+
+                    <div className='text-center my-auto font-medium capitalize md:w-24'>
+                        {props.calendar.format('MMMM [de] yyyy')}
+                    </div>
+
+                    <button
+                        id='btnAction'
+                        onClick={() =>
+                            props.setCalendar(
+                                props.calendar.add(1, 'month').clone()
+                            )
+                        }
+                    >
+                        <Icon
+                            type={
+                                <AiOutlineArrowRight
+                                    size={24}
+                                    style={{ display: 'block' }}
+                                />
+                            }
+                        />
+                    </button>
+
+                    <button id='btnAction' onClick={() => logOut()}>
+                        <Icon
+                            type={
+                                <RiShutDownLine
+                                    size={24}
+                                    style={{ display: 'block' }}
+                                />
+                            }
+                        />
+                    </button>
+
+                    <div className='flex flex-row gap-x-4 items-center'>
+                        <img
+                            className='rounded-full ring ring-primary'
+                            width={30}
+                            src={perfil.picture}
+                        />
+                        <p className='ring ring-primary rounded-full p-1'>
+                            {perfil.given_name}
+                        </p>
+                    </div>
                 </div>
-
-                <button id='btnAction' onClick={() => props.setCalendar(props.calendar.add(1, 'month').clone())}>
-                    <Icon type={<AiOutlineArrowRight size={24} style={{ display: 'block' }} />} />
-                </button>
-
-                <button id='btnAction' onClick={() => logOut()}>
-                    <Icon type={<RiShutDownLine size={24} style={{ display: 'block' }}/>} />
-                </button>
-
-                <div className='flex flex-row gap-x-4 items-center'>
-                    <img className='rounded-full ring ring-primary' width={30} src={perfil.picture} />
-                    <p className='ring ring-primary rounded-full p-1'>{perfil.given_name}</p>
-                </div>
-                
+                <table>
+                    <tr className='bg-inherit text-xl h-10'>
+                        {weekDays.map((weekDay) => (
+                            <th>{weekDay}</th>
+                        ))}
+                    </tr>
+                    {drawCalendar()}
+                </table>
             </div>
-        <table>
-            <tr className='bg-inherit text-xl h-10'>
-                {weekDays.map(weekDay => <th>{weekDay}</th>)}
-            </tr>
-                {drawCalendar()}
-        </table>
-        </div>
-        {props.children}
-    </>
-    
+            {props.children}
+        </>
+    )
 }
 
 function getCalendar(month: number, year: number) {
@@ -96,10 +154,8 @@ function getCalendar(month: number, year: number) {
         .clone()
         .startOf('month')
         .startOf('week')
-    
-    const endDate = moment([year, month])
-        .clone()
-        .endOf('month')
+
+    const endDate = moment([year, month]).clone().endOf('month')
 
     const day = startDate.clone().subtract(1, 'day')
 
