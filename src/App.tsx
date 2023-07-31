@@ -11,11 +11,11 @@ function App() {
     const [auth, setAuth] = useState(false)
 
     return (
-        <BrowserRouter basename={process.env.PUBLIC_URL}>
+        <BrowserRouter>
             <Routes>
                 {/* Login */}
                 <Route
-                    path='/'
+                    path='/scalaproject-front'
                     element={
                         <LoginPage
                             setUsuario={setUsuario}
