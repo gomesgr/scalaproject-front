@@ -13,10 +13,10 @@ export default {
             },
         colors: {
             'text': '#0b240a',
-'background': '#fbfefb',
-'primary': '#272d90',
-'secondary': '#d5f3d3',
-'accent': '#c4363d',
+            'background': '#fbfefb',
+            'primary': '#272d90',
+            'secondary': '#d5f3d3',
+            'accent': '#c4363d',
         }
         },
         container: {
