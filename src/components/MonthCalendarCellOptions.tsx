@@ -1,15 +1,15 @@
 import { FaTimes } from 'react-icons/fa'
 import Icon from './Icon'
-import { Culto, Funcao, Membro, Trabalha, urlTrabalha } from './Constants'
+import { Funcao, Membro, Trabalha, urlTrabalha } from './Constants'
 import SelectMembers from './SelectMembers'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 import Table from './table/Table'
 
 export default function MonthCalendarCellOptions(props: any) {
     const funcoes: Funcao[] = props.funcoes
     const membros: Membro[] = props.membros
-    const cultos: Culto[] = props.cellData.cultos
+    // const cultos: Culto[] = props.cellData.cultos
     const dia: number = props.cellData.dia
     const trabalham: Trabalha[] = props.trabalham
 
