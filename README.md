@@ -18,6 +18,7 @@ Os pontos cruciais do mesmo são: <br>
 ### Frontend
 
 -   React (vite)
+-   Cores geradas por [Realtime Colors](https://www.realtimecolors.com/)
 
 ### [Backend](https://github.com/gomesgr/scalaproject)
 
